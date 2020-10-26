@@ -1,4 +1,4 @@
-# **What-I-Learned-In-Week-6**
+# ☕️ **What-I-Learned-In-Week-6** ☕️
 ![dude](img/three-arms.gif)
 ## The conditional (`ternary`) `operator` ⇲<br>
  iIt's the only JavaScript `operator` that takes `three operands`: a `condition` followed by a question mark (`?`), then an `expression` to execute if the condition is truthy followed by a colon (`:`), and finally the `expression` to execute `if` the condition is `falsy`. This operator is frequently used as a shortcut for the if statement.<br>
@@ -137,7 +137,7 @@ multiply(5, undefined)  // 5
 ---
 ## `module.exports` and `require` ⇲<br>
 The [CommonJS (CJS)](https://en.wikipedia.org/wiki/CommonJS) format is used in Node.js and uses `require` and `module.exports` to define dependencies and modules. The npm ecosystem is built upon this format.
-## Requiring a module ⇲<br>
+## Requiring a `module` ⇲<br>
 Node.js comes with a set of built-in modules that we can use in our code without having to install them. To do this, we need to require the module using the require keyword and assign the result to a variable. This can then be used to invoke any methods the module exposes.
 
 For example, to list out the contents of a directory, you can use the file system module and its readdir method:
@@ -151,3 +151,23 @@ fs.readdir(folderPath, (err, files) => {
   });
 });
 ```
+## Creating and Exporting a `Module` ⇲
+
+Now let’s look at how to create our own `module` and `export` it for use elsewhere in our program. Start off by creating a `user.js` file and adding the following ⇲<br>
+```javascript
+const getName = () => {
+  return 'Jim';
+};
+
+exports.getName = getName;
+```
+Now create an `index.js` file in the same folder and add this ⇲<br>
+```javascript
+const user = require('./user');
+console.log(`User: ${user.getName()}`);
+```
+Run the program using `node` `index.js` and you should see the following output to the terminal:
+```javascript
+User: Jim
+```
+So what has gone on here? Well, if you look at the `user.js` file, you’ll notice that we’re defining a `getName` function, then using the exports keyword to make it available for import elsewhere. Then in the `index.js` file, we’re importing this function and executing it. Also notice that in the require statement, the module name is prefixed with `./`, as it’s a `local file`. Also note that there’s no need to add the file extension.
